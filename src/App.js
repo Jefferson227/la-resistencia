@@ -1,7 +1,6 @@
 import React from 'react';
 import FirebaseService from './services/firebaseServices';
 import firebaseDatabase from './utils/firebaseUtils';
-import logo from './logo.svg';
 import './App.css';
 
 class App extends React.Component {
@@ -32,7 +31,8 @@ class App extends React.Component {
     console.log('match created successfully');
   }
 
-  addPlayerToMatch(name) {
+  addPlayerToMatch() {
+    const name = document.getElementById('player-name').value;
     const playerId = firebaseDatabase.ref('matches/-M8JR_cNCE_t5ntrDc10/players').push().key;
     const player = {
       name,
@@ -49,6 +49,9 @@ class App extends React.Component {
     let players = [];
 
     FirebaseService.getDataList('matches/-M8JR_cNCE_t5ntrDc10/players', (items) => {
+      document.getElementById('player-list').innerHTML = '';
+      this.setState({ players: [] });
+
       items.forEach((item) => {
         players.push(item);
       });
@@ -61,12 +64,17 @@ class App extends React.Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
+          {/* <p>
             <button type="button" className="new-match" onClick={() => this.addNewMatch()}>
               Create a new match
             </button>
-          </p>
+          </p> */}
+          <div>
+            <input type="text" id="player-name" placeholder="New player name"></input>
+            <button type="button" onClick={() => this.addPlayerToMatch()}>
+              Add new player
+            </button>
+          </div>
           <p>
             <button
               type="button"
@@ -78,20 +86,12 @@ class App extends React.Component {
           </p>
           <div>
             Players:
-            <ul>
+            <ul id="player-list">
               {this.state.players.map((player) => {
                 return <li key={player.key}>{player.name}</li>;
               })}
             </ul>
           </div>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
         </header>
       </div>
     );
