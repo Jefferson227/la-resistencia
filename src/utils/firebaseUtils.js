@@ -1,5 +1,6 @@
-import firebase from "firebase";
+import firebase from 'firebase';
 
+// Create a .env file for these REACT_APP_ variables before deploying to production
 const config = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
