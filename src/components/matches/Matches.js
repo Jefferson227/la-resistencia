@@ -1,4 +1,6 @@
 import React from 'react';
+import Container from '@material-ui/core/Container';
+import Button from '@material-ui/core/Button';
 import FirebaseService from '../../services/firebaseServices';
 // import firebaseDatabase from '../../utils/firebaseUtils';
 import './Matches.css';
@@ -24,21 +26,19 @@ class Matches extends React.Component {
 
   render() {
     return (
-      <section className="Matches">
+      <Container fixed>
         <h3>Select your match</h3>
 
         <div className="Matches-list">
-          <div className="Match">
-            {this.state.matches.map(({ key }) => {
-              return (
-                <a href="#" key={key}>
-                  {key}
-                </a>
-              );
-            })}
-          </div>
+          {this.state.matches.map(({ key }) => {
+            return (
+              <Button variant="contained" key={key}>
+                {key}
+              </Button>
+            );
+          })}
         </div>
-      </section>
+      </Container>
     );
   }
 }
