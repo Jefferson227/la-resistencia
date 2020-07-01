@@ -1,24 +1,19 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Matches from './components/matches/Matches';
-import Match from './components/match/Match';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import LoginContainer from './containers/LoginContainer';
+import DefaultContainer from './containers/DefaultContainer';
 import './App.css';
 
 const App = () => {
   return (
-    <div className="App">
-      <Router>
-        <Switch>
-          <Route path="/match">
-            <Match />
-          </Route>
-
-          <Route path="/">
-            <Matches />
-          </Route>
-        </Switch>
-      </Router>
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <div className="App">
+          <Route exact path="/(login)" component={LoginContainer} />
+          <Route component={DefaultContainer} />
+        </div>
+      </Switch>
+    </BrowserRouter>
   );
 };
 
